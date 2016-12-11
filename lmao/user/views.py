@@ -50,14 +50,15 @@ def undelete(post_id):
     db.session.commit()
     return redirect(url_for('.admin'))
 
-@blueprint.route('/<post_id>', methods=['GET', 'DELETE', 'UNDELETE'])
+@blueprint.route('/<post_id>')
 def post(post_id):
     post = Post.query.filter(Post.id == post_id).first()
-    quote = post.content
     if post is None:
         return abort(404)
+
+    quote = post.content
     if post.deleted == True:
-        quote = 'deleted'
+        quote = ['deleted']
 
     session['viewed'].append(post_id)
     session.modified = True
@@ -76,6 +77,7 @@ def admin():
     if is_admin():
         if request.method == 'POST':
             content = request.form.get('data')
+            print content
             if content == '' or content == None:
                 abort(400, 'Expecting \'data\' parameter')
             new_post = Post(content=content)
