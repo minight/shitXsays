@@ -53,12 +53,15 @@ def undelete(post_id):
 @blueprint.route('/<post_id>', methods=['GET', 'DELETE', 'UNDELETE'])
 def post(post_id):
     post = Post.query.filter(Post.id == post_id).first()
+    quote = post.content
     if post is None:
         return abort(404)
+    if post.deleted == True:
+        quote = 'deleted'
 
     session['viewed'].append(post_id)
     session.modified = True
-    return render_template("quote.html", quote=post.content)
+    return render_template("quote.html", quote=quote)
 
 @blueprint.route('/login', methods=['GET', 'POST'])
 def login():
@@ -86,11 +89,12 @@ def admin():
 @blueprint.route('/', methods=['GET', 'POST'])
 def home():
     # select some random entry that hasn't occured in the previous HISTORY_MAX
-    total_posts = Post.query.count()
+    readable_posts = [str(a[0]) for a in Post.query.with_entities(Post.id).filter(Post.deleted == False).all()]
+    print 'readable posts', readable_posts
     viewed_posts = len(session['viewed'])
-    if (viewed_posts >= total_posts):
+    if (viewed_posts >= len(readable_posts)):
         session['viewed'] = session['viewed'][-HISTORY_MAX:]
         session.modified = True
 
-    unviewed = set(map(str, range(1, total_posts + 1))) - set(session['viewed'])
+    unviewed = set(readable_posts) - set(session['viewed'])
     return redirect(url_for('.post', post_id=sample(unviewed, 1)[0]))
