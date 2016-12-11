@@ -60,7 +60,7 @@ def post(post_id):
     session.modified = True
     return render_template("quote.html", quote=post.content)
 
-@blueprint.route('/login')
+@blueprint.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
         if request.form.get('secret') == ADMIN_KEY:
