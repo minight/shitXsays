@@ -94,7 +94,7 @@ def home():
     viewed_posts = len(session['viewed'])
     history_max = int(len(readable_posts) * 0.7) + 1
     if (viewed_posts >= len(readable_posts)):
-        session['viewed'] = session['viewed'][-HISTORY_MAX:]
+        session['viewed'] = session['viewed'][-history_max:]
         session.modified = True
 
     unviewed = set(readable_posts) - set(session['viewed'])
