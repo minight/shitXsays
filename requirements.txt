@@ -1,0 +1,15 @@
+Flask==0.11.1
+Flask-SQLAlchemy==2.1
+Jinja2==2.8
+MarkupSafe==0.23
+SQLAlchemy==1.1.4
+Twisted==16.6.0
+Werkzeug==0.11.11
+argparse==1.2.1
+click==6.6
+constantly==15.1.0
+incremental==16.10.1
+itsdangerous==0.24
+sjs==1.0
+wsgiref==0.1.2
+zope.interface==4.3.2

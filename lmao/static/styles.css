@@ -1,0 +1,6 @@
+hr { border-color: #cccccc; margin: 0; }
+footer { bottom: 0; position:fixed; width:100%; background-color: white; }
+.no-margins { margin: 0px; }
+.with-margins { margin: 10px; }
+.col-centered { float: none; margin: 0 auto; }
+.main { margin-top: 5rem; }

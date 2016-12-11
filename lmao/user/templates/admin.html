@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class='container main text-xs-left'>
+    <div class="row">
+        <div class="col-xs-6 offset-xs-3">
+            <h1>create</h1>
+            <form method="post" action="/admin">
+                <div class="form-group">
+                    <input type="text" class="form-control" name="data"/>
+                </div>
+                <button type="submit" class="btn btn-secondary w-100">add</button>
+            </form>
+            <h1>existing</h1>
+            {% for post in posts %}
+                <p>
+                    {% if post.deleted %}
+                    <form method="POST" action="/undelete/{{ post.id }}">
+                        <span>{{ post.id }} | {{ post.content }}</span>
+                        <button type="submit" class="close" aria-label="Close">
+                            restore
+                        </button>
+                    </form>
+                    {% else %}
+                    <form method="POST" action="/delete/{{ post.id }}">
+                        <span>{{ post.id }} | {{ post.content }}</span>
+                        <button type="submit" class="close" aria-label="Close">
+                            delete
+                        </button>
+                    </form>
+                    {% endif %}
+                </p>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+

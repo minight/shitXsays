@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+<div class='container main text-xs-left'>
+    <div class="row">
+        <div class="col-xs-4 offset-xs-4">
+            <h1>error {{ errno }}</h4>
+            <p>{{ message }}</p>
+            <button type="button" class="btn btn-secondary" onclick="window.history.back()">back</button>
+            <button type="button" class="btn btn-secondary"><a href="/">home</a></button>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
