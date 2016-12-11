@@ -36,7 +36,7 @@ pip install -r requirements.txt
 Hopefully if you have that done. pray and you should be good.
 
 # License
-
+```
         DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE 
                     Version 2, December 2004 
 
@@ -51,5 +51,6 @@ Hopefully if you have that done. pray and you should be good.
 
   0. You just DO WHAT THE FUCK YOU WANT TO.
 
+```
 
 Disclaimer: This does not extend to any of the softwares, binaries or libraries used in these scripts. Whatever license they have applies there
