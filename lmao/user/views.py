@@ -4,7 +4,7 @@ from . import blueprint
 from .models import Post
 from ..main import db
 
-HISTORY_MAX = 1
+#HISTORY_MAX = 1
 ADMIN_KEY = 'holyshitballs'
 
 def is_admin():
@@ -77,7 +77,6 @@ def admin():
     if is_admin():
         if request.method == 'POST':
             content = request.form.get('data')
-            print content
             if content == '' or content == None:
                 abort(400, 'Expecting \'data\' parameter')
             new_post = Post(content=content)
@@ -92,8 +91,8 @@ def admin():
 def home():
     # select some random entry that hasn't occured in the previous HISTORY_MAX
     readable_posts = [str(a[0]) for a in Post.query.with_entities(Post.id).filter(Post.deleted == False).all()]
-    print 'readable posts', readable_posts
     viewed_posts = len(session['viewed'])
+    history_max = int(len(readable_posts) * 0.7) + 1
     if (viewed_posts >= len(readable_posts)):
         session['viewed'] = session['viewed'][-HISTORY_MAX:]
         session.modified = True
